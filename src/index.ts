@@ -25,6 +25,50 @@ export default {
             },
         },
         {
+            field: 'requestBody',
+            name: 'request_body',
+            type: 'text',
+            meta: {
+                interface: 'input-code',
+                options: {
+                    placeholder:
+                      '{"query": {\n' +
+                      '   "filter": {\n' +
+                      '       "text": {\n' +
+                      '           "_icontains": {{value}}\n' +
+                      '       }\n' +
+                      '   }\n' +
+                      '}}',
+                    font: 'monospace',
+                },
+                width: 'full',
+            },
+        },
+        {
+            field: 'requestMethod',
+            name: 'request_method',
+            type: 'string',
+            schema: {
+                default_value: 'GET',
+            },
+            meta: {
+                width: 'half',
+                interface: 'select-dropdown',
+                options: {
+                    choices: [
+                        {
+                            text: 'GET',
+                            value: 'GET',
+                        },
+                        {
+                            text: 'SEARCH',
+                            value: 'SEARCH',
+                        },
+                    ],
+                },
+            },
+        },
+        {
             field: 'resultsPath',
             name: 'results_path',
             type: 'string',
