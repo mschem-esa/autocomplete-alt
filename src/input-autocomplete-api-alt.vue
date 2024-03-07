@@ -56,6 +56,10 @@ export default {
       type: String,
       default: null
     },
+    requestMethod: {
+      type: String,
+      default: "GET"
+    },
     resultsPath: {
       type: String,
       default: null,
@@ -118,11 +122,18 @@ export default {
       const url = render(props.url, {value});
 
       try {
-        let bodyString = props.requestBody;
-        bodyString = bodyString.replace('{{value}}', `"${value}"`);
-        const bodyObj = JSON.parse(props.requestBody);
+        const getBody = () =>{
+          const bodyString = props.requestBody.replace('{{value}}', `"${value}"`);
+          return JSON.parse(bodyString);
+        };
 
-        const result = await (url.startsWith('/') ? api.get(url) : axios.get(url, bodyObj));
+        const request = {
+          method: props.requestMethod,
+          url: url,
+          data: props.requestBody ? getBody(): undefined,
+        }
+
+        const result = await (url.startsWith('/') ? api.request(request) : axios.request(request));
         const resultsArray = props.resultsPath ? get(result.data, props.resultsPath) : result.data;
 
         if (Array.isArray(resultsArray) === false) {

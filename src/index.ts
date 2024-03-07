@@ -29,18 +29,43 @@ export default {
             name: 'request_body',
             type: 'text',
             meta: {
-                interface: 'input',
+                interface: 'input-code',
                 options: {
-                    placeholder: `
-                        {   
-                            "title": {
-                                "_contains": {{value}}
-                            }
-                        }
-                    `,
+                    placeholder:
+                      '{"query": {\n' +
+                      '   "filter": {\n' +
+                      '       "text": {\n' +
+                      '           "_icontains": {{value}}\n' +
+                      '       }\n' +
+                      '   }\n' +
+                      '}}',
                     font: 'monospace',
                 },
                 width: 'full',
+            },
+        },
+        {
+            field: 'requestMethod',
+            name: 'request_method',
+            type: 'string',
+            schema: {
+                default_value: 'GET',
+            },
+            meta: {
+                width: 'half',
+                interface: 'select-dropdown',
+                options: {
+                    choices: [
+                        {
+                            text: 'GET',
+                            value: 'GET',
+                        },
+                        {
+                            text: 'SEARCH',
+                            value: 'SEARCH',
+                        },
+                    ],
+                },
             },
         },
         {
