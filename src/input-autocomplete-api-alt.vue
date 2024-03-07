@@ -52,6 +52,10 @@ export default {
       type: String,
       default: null,
     },
+    requestBody: {
+      type: String,
+      default: null
+    },
     resultsPath: {
       type: String,
       default: null,
@@ -114,7 +118,11 @@ export default {
       const url = render(props.url, {value});
 
       try {
-        const result = await (url.startsWith('/') ? api.get(url) : axios.get(url));
+        let bodyString = props.requestBody;
+        bodyString = bodyString.replace('{{value}}', `"${value}"`);
+        const bodyObj = JSON.parse(props.requestBody);
+
+        const result = await (url.startsWith('/') ? api.get(url) : axios.get(url, bodyObj));
         const resultsArray = props.resultsPath ? get(result.data, props.resultsPath) : result.data;
 
         if (Array.isArray(resultsArray) === false) {

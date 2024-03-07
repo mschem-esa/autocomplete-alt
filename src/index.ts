@@ -25,6 +25,25 @@ export default {
             },
         },
         {
+            field: 'requestBody',
+            name: 'request_body',
+            type: 'text',
+            meta: {
+                interface: 'input',
+                options: {
+                    placeholder: `
+                        {   
+                            "title": {
+                                "_contains": {{value}}
+                            }
+                        }
+                    `,
+                    font: 'monospace',
+                },
+                width: 'full',
+            },
+        },
+        {
             field: 'resultsPath',
             name: 'results_path',
             type: 'string',
