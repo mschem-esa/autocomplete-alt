@@ -6,7 +6,7 @@
     :placeholder="placeholder"
     :disabled="disabled"
     :class="font"
-    :model-value="value.text ?? value "
+    :model-value="value?.text || value || ''"
     :dir="direction"
     @update:model-value="onInput"
     @focus="activate"
@@ -146,6 +146,7 @@ export default {
     return {t, results, onInput, emitValue};
 
     function onInput(value) {
+      if(!value) return;
       if (value.length > 1) emitValue(value);
       fetchResults(value);
     }
