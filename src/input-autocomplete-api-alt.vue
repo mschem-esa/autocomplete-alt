@@ -131,10 +131,10 @@ export default {
             const bodyString = props.requestBody.replace('{{value}}', value);
             return JSON.parse(bodyString);
           } catch (e) {
-            console.log(`Error when parsing request body:
-              ${e}
-              ${props.requestBody}
-            `);
+            // console.warn(`Error when parsing request body:
+            //   ${e}
+            //   ${props.requestBody}
+            // `);
           }
         };
 
@@ -142,14 +142,12 @@ export default {
           try{
             return JSON.parse(props.requestHeaders);
           } catch (e) {
-            console.log(`Error when parsing request headers:
-              ${e}
-              ${props.requestHeaders}
-            `);
+            // console.warn(`Error when parsing request headers:
+            //   ${e}
+            //   ${props.requestHeaders}
+            // `);
           }
         }
-
-        console.log(value);
 
         const request = {
           method: props.requestMethod,
@@ -157,8 +155,6 @@ export default {
           data: props.requestBody ? getBody() : undefined,
           headers: props.requestHeaders ? getHeaders() : {},
         };
-
-        console.log(request);
 
         const result = await (url.startsWith('/') ? api.request(request) : axios.request(request));
         const resultsArray = props.resultsPath ? get(result.data, props.resultsPath) : result.data;
