@@ -35,10 +35,27 @@ export default {
                       '{"query": {\n' +
                       '   "filter": {\n' +
                       '       "text": {\n' +
-                      '           "_icontains": {{value}}\n' +
+                      '           "_icontains": "{{value}}"\n' +
                       '       }\n' +
                       '   }\n' +
                       '}}',
+                    font: 'monospace',
+                },
+                width: 'full',
+            },
+        },
+        {
+            field: 'requestHeaders',
+            name: 'request_headers',
+            type: 'text',
+            meta: {
+                interface: 'input-code',
+                options: {
+                    placeholder:
+                      '{\n' +
+                      '    "Content-Type": "application/json",\n' +
+                      '    "Authorization": "Bearer yourAccessToken"\n' +
+                      '}',
                     font: 'monospace',
                 },
                 width: 'full',

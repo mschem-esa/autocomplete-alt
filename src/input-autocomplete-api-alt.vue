@@ -56,6 +56,10 @@ export default {
       type: String,
       default: null
     },
+    requestHeaders: {
+      type: String,
+      default: null
+    },
     requestMethod: {
       type: String,
       default: "GET"
@@ -122,16 +126,35 @@ export default {
       const url = render(props.url, {value});
 
       try {
-        const getBody = () =>{
-          const bodyString = props.requestBody.replace('{{value}}', `"${value}"`);
-          return JSON.parse(bodyString);
+        const getBody = () => {
+          try{
+            const bodyString = props.requestBody.replace('{{value}}', value);
+            return JSON.parse(bodyString);
+          } catch (e) {
+            // console.warn(`Error when parsing request body:
+            //   ${e}
+            //   ${props.requestBody}
+            // `);
+          }
         };
+
+        const getHeaders = () => {
+          try{
+            return JSON.parse(props.requestHeaders);
+          } catch (e) {
+            // console.warn(`Error when parsing request headers:
+            //   ${e}
+            //   ${props.requestHeaders}
+            // `);
+          }
+        }
 
         const request = {
           method: props.requestMethod,
           url: url,
-          data: props.requestBody ? getBody(): undefined,
-        }
+          data: props.requestBody ? getBody() : undefined,
+          headers: props.requestHeaders ? getHeaders() : {},
+        };
 
         const result = await (url.startsWith('/') ? api.request(request) : axios.request(request));
         const resultsArray = props.resultsPath ? get(result.data, props.resultsPath) : result.data;
