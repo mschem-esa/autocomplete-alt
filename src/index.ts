@@ -45,6 +45,23 @@ export default {
             },
         },
         {
+            field: 'requestHeaders',
+            name: 'request_headers',
+            type: 'text',
+            meta: {
+                interface: 'input-code',
+                options: {
+                    placeholder:
+                      'headers: {\n' +
+                      '    \'Content-Type\': \'application/json\',\n' +
+                      '    \'Authorization\': \'Bearer yourAccessToken\',\n' +
+                      '},',
+                    font: 'monospace',
+                },
+                width: 'full',
+            },
+        },
+        {
             field: 'requestMethod',
             name: 'request_method',
             type: 'string',
