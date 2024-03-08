@@ -35,7 +35,7 @@ export default {
                       '{"query": {\n' +
                       '   "filter": {\n' +
                       '       "text": {\n' +
-                      '           "_icontains": {{value}}\n' +
+                      '           "_icontains": "{{value}}"\n' +
                       '       }\n' +
                       '   }\n' +
                       '}}',

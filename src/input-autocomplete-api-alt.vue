@@ -123,7 +123,7 @@ export default {
 
       try {
         const getBody = () =>{
-          const bodyString = props.requestBody.replace('{{value}}', `"${value}"`);
+          const bodyString = props.requestBody.replace('{{value}}', value);
           return JSON.parse(bodyString);
         };
 
