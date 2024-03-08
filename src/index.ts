@@ -35,7 +35,7 @@ export default {
                       '{"query": {\n' +
                       '   "filter": {\n' +
                       '       "text": {\n' +
-                      '           "_icontains": {{value}}\n' +
+                      '           "_icontains": "{{value}}"\n' +
                       '       }\n' +
                       '   }\n' +
                       '}}',
@@ -52,10 +52,10 @@ export default {
                 interface: 'input-code',
                 options: {
                     placeholder:
-                      'headers: {\n' +
-                      '    \'Content-Type\': \'application/json\',\n' +
-                      '    \'Authorization\': \'Bearer yourAccessToken\',\n' +
-                      '},',
+                      '{\n' +
+                      '    "Content-Type": "application/json",\n' +
+                      '    "Authorization": "Bearer yourAccessToken"\n' +
+                      '}',
                     font: 'monospace',
                 },
                 width: 'full',
